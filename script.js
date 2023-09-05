@@ -1,4 +1,10 @@
-const myArray = [];
+let myArray = [];
+if(localStorage.getItem("taskEntry") === null) {
+    myArray = [];
+} else {
+    myArray = JSON.parse(localStorage.getItem("taskEntry"));
+
+}
 const entry = document.getElementById('input');
 let taskList = document.getElementById('taskList');
 
@@ -34,13 +40,12 @@ function addTask(){
 
 }
 
-let retrieveObj = JSON.parse(localStorage.getItem("taskEntry"));
 
 function showItem(){
-    let li = document.createElement('li');
     for(let i = 0; i < myArray.length; i++){
+        let li = document.createElement('li');
         li.innerHTML = myArray[i].item;
-        taskList.appendchild(li)
+        taskList.appendChild(li)
         
     }
 }
