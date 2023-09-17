@@ -9,6 +9,7 @@ const entry = document.getElementById('input');
 let taskList = document.getElementById('taskList');
 
 
+
 function addTask(){
     let li = document.createElement("li");
     li.innerHTML = entry.value;
@@ -35,8 +36,11 @@ function addTask(){
 
     deleteBtn.addEventListener("click", function(){
         taskList.removeChild(li);
-        
-    })
+        myArray.splice(this, 1);
+        myObjString = JSON.stringify(myArray);
+        localStorage.setItem("taskEntry", myObjString);
+        }
+    )
 
 }
 
@@ -44,13 +48,22 @@ function addTask(){
 function showItem(){
     for(let i = 0; i < myArray.length; i++){
         let li = document.createElement('li');
+
         li.innerHTML = myArray[i].item;
-        taskList.appendChild(li)
+        taskList.appendChild(li);
         
+        let deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = 'Delete';
+        li.appendChild(deleteBtn);
+
+        deleteBtn.addEventListener("click", function(){
+            taskList.removeChild(li);
+        })
     }
 }
-showItem()
+showItem();
 
 function clearBtn(){
     localStorage.removeItem("taskEntry");
+    taskList.innerHTML = "";
 }
