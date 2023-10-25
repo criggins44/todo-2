@@ -8,7 +8,10 @@ if(localStorage.getItem("taskEntry") === null) {
 const entry = document.getElementById('input');
 let taskList = document.getElementById('taskList');
 
-
+function deleteTodo(id){
+    myArray.splice(i, 1);
+    localStorage.setItem("taskEntry", myArray.splice(i, 1));
+}
 
 function addTask(){
     let li = document.createElement("li");
@@ -16,10 +19,15 @@ function addTask(){
 
     let deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = 'Delete';
-
+    
     taskList.appendChild(li);
 
     li.appendChild(deleteBtn);
+
+    deleteBtn.onclick = function(){
+        deleteTodo(this.id)
+    }
+}
 
     let myObj = {
         item: entry.value,
@@ -33,16 +41,15 @@ function addTask(){
     
     let myObjString = JSON.stringify(myArray);
     localStorage.setItem("taskEntry", myObjString);
-
+    /*
     deleteBtn.addEventListener("click", function(){
         taskList.removeChild(li);
         myArray.splice(this, 1);
         myObjString = JSON.stringify(myArray);
         localStorage.setItem("taskEntry", myObjString);
         }
-    )
+    )*/
 
-}
 
 
 function showItem(){
@@ -66,4 +73,5 @@ showItem();
 function clearBtn(){
     localStorage.removeItem("taskEntry");
     taskList.innerHTML = "";
+    
 }
